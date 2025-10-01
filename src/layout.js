@@ -34,6 +34,8 @@ import {
 import { Button } from "./components/ui/button";
 import { Badge } from "./components/ui/badge";
 
+import ChatBot from "./chatbot"; // Adjust relative path as per your folder structure
+
 
 const navigationItems = [
   {
@@ -77,7 +79,7 @@ const navigationItems = [
     icon: Users,
   },
   {
-    title: "Admin Dashboard", 
+    title: "Admin Dashboard",
     url: createPageUrl("AdminDashboard"),
     icon: BarChart3,
   }
@@ -95,7 +97,7 @@ export default function Layout({ children, currentPageName }) {
     const titles = {
       en: {
         "Home": "DBT Buddy",
-        "Learn": "Learn About DBT", 
+        "Learn": "Learn About DBT",
         "SelfCheck": "Check DBT Status",
         "Schemes": "DBT Schemes",
         "Quiz": "DBT Quiz",
@@ -108,7 +110,7 @@ export default function Layout({ children, currentPageName }) {
         "Home": "डीबीटी मित्र",
         "Learn": "डीबीटी के बारे में जानें",
         "SelfCheck": "डीबीटी स्थिति जांचें",
-        "Schemes": "डीबीटी योजनाएं", 
+        "Schemes": "डीबीटी योजनाएं",
         "Quiz": "डीबीटी क्विज़",
         "Achievements": "उपलब्धियां",
         "FindBank": "बैंक खोजें",
@@ -150,7 +152,7 @@ export default function Layout({ children, currentPageName }) {
               </div>
             </div>
           </SidebarHeader>
-          
+
           <SidebarContent className="p-3">
             <SidebarGroup>
               <SidebarGroupLabel className="text-xs font-medium text-gray-500 uppercase tracking-wider px-3 py-2">
@@ -160,8 +162,8 @@ export default function Layout({ children, currentPageName }) {
                 <SidebarMenu>
                   {navigationItems.map((item) => (
                     <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton 
-                        asChild 
+                      <SidebarMenuButton
+                        asChild
                         className={`hover:bg-orange-50 hover:text-[var(--primary-orange)] transition-all duration-200 rounded-lg mb-1 ${
                           location.pathname === item.url ? 'bg-orange-100 text-[var(--primary-orange)] font-semibold' : 'text-[var(--primary-blue)]'
                         }`}
@@ -171,7 +173,7 @@ export default function Layout({ children, currentPageName }) {
                           <span className="font-medium">
                             {language === "en" ? item.title : {
                               "Home": "होम",
-                              "Learn About DBT": "डीबीटी सीखें", 
+                              "Learn About DBT": "डीबीटी सीखें",
                               "Check DBT Status": "डीबीटी जांचें",
                               "DBT Schemes": "डीबीटी योजनाएं",
                               "Take Quiz": "क्विज़ लें",
@@ -254,6 +256,9 @@ export default function Layout({ children, currentPageName }) {
             {children}
           </div>
         </main>
+
+        {/* ChatBot Component */}
+        <ChatBot />
       </div>
     </SidebarProvider>
   );

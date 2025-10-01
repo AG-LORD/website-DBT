@@ -1,10 +1,5 @@
+
 import React, { useState, useEffect } from "react";
-import { Student, School } from "../entities/all";  // relative import fixed
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Progress } from "../components/ui/progress";
-import { Badge } from "../components/ui/badge";
 import { 
   Users, 
   Upload, 
@@ -15,13 +10,17 @@ import {
   FileText,
   MessageCircle
 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Progress } from "../components/ui/progress";
+import { Badge } from "../components/ui/badge";
 import { Link } from "react-router-dom";
-import { createPageUrl } from "../utils/createPageUrl";  // relative import fixed
+import { createPageUrl } from "../utils/createPageUrl";
 
 import StudentUpload from "../components/teacher/Std";
 import StudentList from "../components/teacher/StudentList";
 import SchoolStats from "../components/teacher/SchoolStats";
-
 
 export default function TeacherDashboard() {
   const [students, setStudents] = useState([]);
@@ -36,54 +35,56 @@ export default function TeacherDashboard() {
 
   const loadData = async () => {
     setIsLoading(true);
-    const [studentData, schoolData] = await Promise.all([
-      Student.list("-created_date"),
-      School.list("-created_date")
-    ]);
-    setStudents(studentData);
-    setSchools(schoolData);
-    if (schoolData.length > 0) {
-      setSelectedSchool(schoolData[0]);
+
+    // Mock student and school data to replace Student.list() and School.list()
+    const mockStudents = [
+      { id: 1, name: "Alice", phone: "1234567890", aadhaar_last_4: "1234", class_grade: "9", dbt_status: "ready" },
+      { id: 2, name: "Bob", phone: "2345678901", aadhaar_last_4: "2345", class_grade: "10", dbt_status: "not_ready" },
+      { id: 3, name: "Charlie", phone: "3456789012", aadhaar_last_4: "3456", class_grade: "8", dbt_status: "ready" }
+    ];
+
+    const mockSchools = [
+      { id: 1, name: "Springfield High" },
+      { id: 2, name: "Shelbyville Middle" }
+    ];
+
+    // Simulate async fetch
+    await new Promise((r) => setTimeout(r, 500));
+
+    setStudents(mockStudents);
+    setSchools(mockSchools);
+
+    if (mockSchools.length > 0) {
+      setSelectedSchool(mockSchools[0]);
     }
     setIsLoading(false);
   };
 
   const handleStudentUpload = async (uploadedStudents) => {
-    // Process uploaded students
+    // Process uploaded students (mock)
     for (const student of uploadedStudents) {
-      await Student.create({
-        ...student,
-        school_id: selectedSchool?.id
-      });
+      setStudents((prev) => [...prev, { ...student, school_id: selectedSchool?.id, id: prev.length + 1 }]);
     }
-    loadData(); // Refresh data
   };
 
   const sendReminders = async () => {
-    // Mock sending reminders
-    alert(language === "en" ? 
-      "Reminders sent to students who need DBT enablement!" :
-      "डीबीटी सक्षमता चाहने वाले छात्रों को रिमाइंडर भेजे गए!"
+    alert(language === "en" 
+      ? "Reminders sent to students who need DBT enablement!" 
+      : "डीबीटी सक्षमता चाहने वाले छात्रों को रिमाइंडर भेजे गए!"
     );
   };
 
   const exportReport = () => {
     const csvContent = [
       ["Name", "Phone", "Last 4 Digits", "Class", "DBT Status"],
-      ...students.map(student => [
-        student.name,
-        student.phone,
-        student.aadhaar_last_4,
-        student.class_grade,
-        student.dbt_status
-      ])
+      ...students.map(s => [s.name, s.phone, s.aadhaar_last_4, s.class_grade, s.dbt_status])
     ].map(row => row.join(",")).join("\n");
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `dbt-readiness-report-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `dbt-readiness-report-${new Date().toISOString().split("T")[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -134,7 +135,7 @@ export default function TeacherDashboard() {
             <h1 className="text-3xl font-bold text-[var(--primary-blue)]">{currentContent.title}</h1>
             <p className="text-gray-600 mt-1">{currentContent.subtitle}</p>
           </div>
-          
+
           {/* Language Toggle */}
           <div className="flex gap-3 items-center">
             <div className="bg-white rounded-full p-1 shadow-md border border-[var(--border-color)]">
@@ -155,7 +156,7 @@ export default function TeacherDashboard() {
                 हिंदी
               </Button>
             </div>
-            
+
             <Button onClick={exportReport} variant="outline" className="border-[var(--secondary-blue)] text-[var(--secondary-blue)] hover:bg-blue-50">
               <Download className="w-4 h-4 mr-2" />
               {currentContent.actions.export}

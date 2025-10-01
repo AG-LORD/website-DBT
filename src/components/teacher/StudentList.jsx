@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { CheckCircle2, XCircle, Clock, AlertCircle } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 
+
 export default function StudentList({ students, isLoading, language }) {
   const getStatusIcon = (status) => {
     switch (status) {
@@ -18,7 +19,7 @@ export default function StudentList({ students, isLoading, language }) {
   const getStatusBadge = (status) => {
     const styles = {
       ready: "bg-green-100 text-green-800 border-green-200",
-      not_ready: "bg-orange-100 text-[var(--primary-orange)] border-orange-200",
+      not_ready: "bg-orange-100 text-[var(--primary-orange)] border-orange-200", 
       pending: "bg-blue-100 text-[var(--secondary-blue)] border-blue-200",
       not_checked: "bg-gray-100 text-gray-800 border-gray-200"
     };

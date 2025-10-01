@@ -16,56 +16,55 @@ import {
   Heart
 } from "lucide-react";
 
-
 export default function Home() {
   const features = [
-    {
-      icon: CheckCircle2,
-      title: "Check DBT Readiness",
-      description: "Verify if your bank account is ready for direct scholarship transfers",
-      href: createPageUrl("SelfCheck"),
-      color: "bg-[var(--secondary-blue)]"
-    },
-    {
-      icon: BookOpen,
-      title: "Learn About DBT", 
-      description: "Understand the difference between Aadhaar-linked and DBT-enabled accounts",
-      href: createPageUrl("Learn"),
-      color: "bg-[var(--primary-blue)]"
-    },
-    {
-      icon: Trophy,
-      title: "Take the Quiz",
-      description: "Test your knowledge and earn DBT Hero badges",
-      href: createPageUrl("Quiz"),
-      color: "bg-green-500" // Kept green for quiz trophy
-    },
-    {
-      icon: Users,
-      title: "For Teachers",
-      description: "Manage student data and track DBT readiness across your school",
-      href: createPageUrl("TeacherDashboard"),
-      color: "bg-[var(--primary-orange)]"
-    }
-  ];
+  {
+    icon: CheckCircle2,
+    title: "Check DBT Readiness",
+    description: "Verify if your bank account is ready for direct scholarship transfers",
+    href: createPageUrl("SelfCheck"),
+    color: "bg-[var(--secondary-blue)]"
+  },
+  {
+    icon: BookOpen,
+    title: "Learn About DBT",
+    description: "Understand the difference between Aadhaar-linked and DBT-enabled accounts",
+    href: createPageUrl("Learn"),
+    color: "bg-[var(--primary-blue)]"
+  },
+  {
+    icon: Trophy,
+    title: "Take the Quiz",
+    description: "Test your knowledge and earn DBT Hero badges",
+    href: createPageUrl("Quiz"),
+    color: "bg-green-500" // Kept green for quiz trophy
+  },
+  {
+    icon: Users,
+    title: "For Teachers",
+    description: "Manage student data and track DBT readiness across your school",
+    href: createPageUrl("TeacherDashboard"),
+    color: "bg-[var(--primary-orange)]"
+  }];
+
 
   const benefits = [
-    {
-      icon: Shield,
-      title: "Privacy Protected",
-      description: "Your Aadhaar data is never stored. We use Virtual ID simulation only."
-    },
-    {
-      icon: Zap,
-      title: "Instant Results",
-      description: "Get immediate feedback on your DBT readiness status."
-    },
-    {
-      icon: Heart,
-      title: "Student Focused",
-      description: "Designed specifically for students seeking scholarship support."
-    }
-  ];
+  {
+    icon: Shield,
+    title: "Privacy Protected",
+    description: "Your Aadhaar data is never stored. We use Virtual ID simulation only."
+  },
+  {
+    icon: Zap,
+    title: "Instant Results",
+    description: "Get immediate feedback on your DBT readiness status."
+  },
+  {
+    icon: Heart,
+    title: "Student Focused",
+    description: "Designed specifically for students seeking scholarship support."
+  }];
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -114,8 +113,8 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <Link key={index} to={feature.href}>
+            {features.map((feature, index) =>
+            <Link key={index} to={feature.href}>
                 <Card className="h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-2 border-transparent hover:border-[var(--primary-orange)] bg-[var(--background-light)]">
                   <CardHeader className="pb-4">
                     <div className={`w-12 h-12 ${feature.color} rounded-lg flex items-center justify-center mb-4`}>
@@ -128,7 +127,7 @@ export default function Home() {
                   </CardContent>
                 </Card>
               </Link>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -143,15 +142,15 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center">
+            {benefits.map((benefit, index) =>
+            <div key={index} className="text-center">
                 <div className="w-16 h-16 bg-[var(--primary-blue)] rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <benefit.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -172,7 +171,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link to={createPageUrl("Learn")}>
-              <Button size="lg" variant="outline" className="px-8 py-3 text-lg border-white text-white hover:bg-white hover:text-[var(--primary-blue)]">
+              <Button size="lg" variant="outline" className="bg-background text-[#1d1616] px-8 py-3 text-lg font-medium inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border h-11 rounded-md border-white hover:bg-white hover:text-[var(--primary-blue)]">
                 Learn First
               </Button>
             </Link>
@@ -197,6 +196,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 }

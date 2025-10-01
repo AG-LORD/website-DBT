@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import FindBank from "./pages/FindBank";
 import Schemes from "./pages/Schemes";
 import Achievements from "./pages/Achievements";
+import Chatbot from "./chatbot";  // Import your new Chatbot component
 
 import Layout from "./layout";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/FindBank" element={<FindBank />} />
           <Route path="/Schemes" element={<Schemes />} />
           <Route path="/Achievements" element={<Achievements />} />
+          <Route path="/chatbot" element={<Chatbot />} />  {/* Add route for Chatbot */}
         </Routes>
       </Layout>
     </Router>
